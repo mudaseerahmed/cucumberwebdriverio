@@ -34,6 +34,9 @@ class LoginPage extends Page {
     get priceproducts(){
         return $$("//span[contains(.,'SAVE')]//preceding::span[1]/..");
     }
+   async entertext(name){
+       await $("input[id$='demo']").setValue(name);
+   }
 
     /**
      * a method to encapsule automation code to interact with the page

@@ -56,7 +56,11 @@ Then(/^validate price between lower and higher$/,async()=>{
         console.log(num+"is the value in array");
 
 })
+Then(/^user enters different values in search textbox "([^\"]*)"$/, async (input) => {
+  await browser.scroll(0, 0);
+  await LoginPage.entertext(input);
 
+})
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
     await expect(SecurePage.flashAlert).toBeExisting();
     await expect(SecurePage.flashAlert).toHaveTextContaining(message);
