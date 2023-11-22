@@ -57,10 +57,19 @@ Then(/^validate price between lower and higher$/,async()=>{
 
 })
 Then(/^user enters different values in search textbox "([^\"]*)"$/, async (input) => {
-  await browser.scroll(0, 0);
   await LoginPage.entertext(input);
+  await browser.keys('Enter');
+ // await browser.scroll(0, 0);
 
 })
+Then(/^validate text of the product is "([^\"]*)"$/, async (input) => {
+  await LoginPage.entertext(input);
+  await LoginPage.clickonproducts();
+});
+Then(/^get the text of number of products$/,async()=>{
+   let productvalue=await LoginPage.products.getText();
+   console.log(productvalue+"is the no of products");
+});
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
     await expect(SecurePage.flashAlert).toBeExisting();
     await expect(SecurePage.flashAlert).toHaveTextContaining(message);
