@@ -36,8 +36,27 @@ class LoginPage extends Page {
     }
    async entertext(name){
        await $("input[id$='demo']").setValue(name);
+       await browser.keys('Enter');
+       await browser.pause(8000);
+   }
+   async clickonproducts(){
+    const links=await $$("//h2[text()='Recommended']//preceding::a/h4[contains(@class,'semi-bold')]");
+    console.log(links.length+"is the length");
+    for(let i=0;i<links.length;i++){
+        console.log("the values are",await links[i].getText());
+    }
+ 
+    // browser.pause(4000);
+    // browser.back();
+   
    }
 
+   get products(){
+    return $("(//p[contains(.,'products')])[1]");
+}
+   clickproductsnavigateback(){
+   return this.clickonproducts().map()
+}
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
