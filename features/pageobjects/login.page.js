@@ -45,10 +45,13 @@ class LoginPage extends Page {
     for(let i=0;i<links.length;i++){
         console.log("the values are",await links[i].getText());
     }
- 
-    // browser.pause(4000);
-    // browser.back();
-   
+   }
+   get pricebeforediscount(){
+    return $$("//span[contains(.,'SAVE')]//preceding::del[1]");
+  
+   }
+   get priceafterdiscount(){
+    return  $$("//span[contains(.,'SAVE')]//preceding::span[2]");
    }
 
    get products(){

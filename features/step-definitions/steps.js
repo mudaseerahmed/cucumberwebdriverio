@@ -9,7 +9,7 @@ const pages = {
 }
 
 Given(/^I am on the (\w+) page$/, async (page) => {
-    await LoginPage.navigateTo("https://www.hamleys.in/collections/category-sports-outdoor");
+    await LoginPage.navigateTo("https://www.hamleys.in/collections/category-school-travel-travel");
 });
 
 When(/^I login with (\w+) and (.+)$/, async (username, password) => {
@@ -69,6 +69,24 @@ Then(/^validate text of the product is "([^\"]*)"$/, async (input) => {
 Then(/^get the text of number of products$/,async()=>{
    let productvalue=await LoginPage.products.getText();
    console.log(productvalue+"is the no of products");
+});
+Then(/^user validates price before discount$/,async()=>{
+       await browser.scroll(0, 3000);
+       let priceamts= await LoginPage.pricebeforediscount;
+        for( let i=0;i<priceamts.length;i++){
+          let priceamttext=await priceamts[i].getText();
+          console.log(priceamttext+"is the text before discount");
+        }
+        await browser.pause(8000);
+       
+});
+Then(/^user validates price after discount$/,async()=>{
+   let priceamts= await LoginPage.priceafterdiscount;
+   for( let i=0;i<priceamts.length;i++){
+     let priceamttext=await priceamts[i].getText();
+     console.log(priceamttext+"is the text after discount");
+   }
+   await browser.pause(8000);
 });
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
     await expect(SecurePage.flashAlert).toBeExisting();
